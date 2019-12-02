@@ -28,3 +28,5 @@ This project uses server-side Blazor, where the client communicates with the ser
 * Wonde School Data Sync Account (https://wonde.com/developers)
 
 You will need to configure your Wonde token. In your Wonde account, get a multi-school API token. Then create a user secret as per the instructions here: https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-3.0&tabs=windows
+
+In addition, you must configure your NuGet feed to include the DevExpress Blazor libraries - you can get your details by signing in here: https://nuget.devexpress.com/
