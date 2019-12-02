@@ -1,0 +1,12 @@
+﻿@if (DisplayLoadingSpinner)
+{
+    <div class="loader">Loading...</div>
+}
+
+@code {
+    /// <summary>
+    /// Display the loading spinner if this is true
+    /// </summary>
+    [Parameter]
+    public bool DisplayLoadingSpinner {get; set;}
+}

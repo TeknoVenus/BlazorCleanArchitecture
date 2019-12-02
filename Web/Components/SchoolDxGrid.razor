@@ -1,0 +1,20 @@
+﻿@using Core.Entities
+<div class="row mt-4">
+    <div class="col-12">
+        <DxDataGrid Data="@SchoolList"
+                    ShowFilterRow="false">
+            <DxDataGridColumn Field="Id" Caption="School ID"></DxDataGridColumn>
+            <DxDataGridColumn Field="Name" Caption="School Name"></DxDataGridColumn>
+            <DxDataGridColumn Field="EstablishmentNumber" Caption="School Number"></DxDataGridColumn>
+            <DxDataGridColumn Field="EducationLevel" Caption="Level"></DxDataGridColumn>
+            <DxDataGridColumn Field="Address.LineOne" Caption="Address Line One"></DxDataGridColumn>
+            <DxDataGridColumn Field="Address.LineTwo" Caption="Address Line Two"></DxDataGridColumn>
+            <DxDataGridColumn Field="Address.Postcode" Caption="Postcode"></DxDataGridColumn>
+            <DxDataGridColumn Field="Address.Country.Name" Caption="Postcode"></DxDataGridColumn>
+        </DxDataGrid>
+    </div>
+</div>
+@code {
+    [Parameter]
+    public IEnumerable<School> SchoolList { get; set; }
+}

@@ -1,0 +1,35 @@
+﻿@if (ShowError)
+{
+    <DxPopup HeaderText="An Error Occured" CloseButtonClick="@(() => ShowError = false)">
+        <ChildContent>
+            <p>Sorry, an error occured. Please contact your friendly developer and give them the following details:</p>
+            <p>
+                <pre>@ErrorMessage</pre>
+            </p>
+        </ChildContent>
+    </DxPopup>
+}
+
+@code {
+    /// <summary>
+    /// The error message to show
+    /// </summary>
+    [Parameter]
+    public string ErrorMessage { get; set; }
+
+    // When the close button is clicked, ShowError is set to false so we need to inform Blazor the state of the page has changed
+    private bool _showError;
+    [Parameter]
+    public bool ShowError
+    {
+        get
+        {
+            return _showError;
+        }
+        set
+        {
+            _showError = value;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+}

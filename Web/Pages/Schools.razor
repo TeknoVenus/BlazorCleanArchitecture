@@ -1,0 +1,45 @@
+﻿@page "/schools"
+@using Core.Entities
+@using Core.Interfaces.Repositories
+@inject ISchoolRepository SchoolRepository
+
+<h1>Schools</h1>
+<p>This page shows all the schools you have access to in Wonde</p>
+
+@* Whilst we load data, show a nice spinner*@
+<Web.Components.LoadingSpinner DisplayLoadingSpinner="@Loading"></Web.Components.LoadingSpinner>
+
+@if (SchoolList.Any())
+{
+
+    <Web.Components.SchoolDxGrid SchoolList="@SchoolList"></Web.Components.SchoolDxGrid>
+}
+
+@* If an error occurs, show a friendly alert *@
+<Web.Components.ErrorPopup ErrorMessage="@ErrorMessage" ShowError="@showError"></Web.Components.ErrorPopup>
+
+@code {
+    IEnumerable<School> SchoolList = new List<School>();
+
+    bool Loading;
+
+    string ErrorMessage;
+    bool showError;
+
+    // On page load, get all schools
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            Loading = true;
+            var data = await SchoolRepository.GetAll();
+            SchoolList = data.ToList();
+            Loading = false;
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+            showError = true;
+        }
+    }
+}

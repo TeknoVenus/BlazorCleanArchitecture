@@ -1,0 +1,14 @@
+﻿@using Core.Entities
+<div class="row mt-2">
+    <DxDataGrid Data="@StudentList">
+        <DxDataGridColumn Field="@nameof(Student.id)" Caption="Student ID"></DxDataGridColumn>
+        <DxDataGridColumn Field="@nameof(Student.forename)" Caption="Forename"></DxDataGridColumn>
+        <DxDataGridColumn Field="@nameof(Student.surname)" Caption="Surname"></DxDataGridColumn>
+        <DxDataGridColumn Field="date_of_birth.date" Caption="DoB"></DxDataGridColumn>
+        <DxDataGridColumn Field="@nameof(Student.gender)" Caption="Gender"></DxDataGridColumn>
+    </DxDataGrid>
+</div>
+@code {
+    [Parameter]
+    public IEnumerable<Student> StudentList { get; set; }
+}
