@@ -21,9 +21,8 @@ This project uses server-side Blazor, where the client communicates with the ser
 
 ## Building and Running
 ### Requirements
-* .NET Core 3.0 Runtime
-* Visual Studio 2019 
-* MS SQL Server instance (localDB works fine)
+* .NET Core 3.1 Runtime
+* Visual Studio 2019 16.4.0
 * DevExpress Blazor Components (https://www.devexpress.com/blazor/)
 * Wonde School Data Sync Account (https://wonde.com/developers)
 
