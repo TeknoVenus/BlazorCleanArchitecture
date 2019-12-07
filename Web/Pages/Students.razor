@@ -1,83 +1,17 @@
 ﻿@page "/students"
+@using Web.Components
 @using Core.Entities
-@using Core.Interfaces.Repositories
-@inject ISchoolRepository SchoolRepository
-@inject IStudentRepository StudentRepository
 
 <h1>Students</h1>
 
 <DxComboBox Data="@SchoolList" TextFieldName="@nameof(School.Name)" @bind-SelectedItem="@SelectedSchool" NullText="Select School ..."></DxComboBox>
 
-<Web.Components.LoadingSpinner DisplayLoadingSpinner="@Loading"></Web.Components.LoadingSpinner>
+<LoadingSpinner DisplayLoadingSpinner="@Loading"></LoadingSpinner>
 
 @if (StudentList.Any())
 {
-    <Web.Components.StudentDxGrid StudentList="@StudentList"></Web.Components.StudentDxGrid>
+    <StudentDxGrid StudentList="@StudentList"></StudentDxGrid>
 }
 
 @* If an error occurs, show a friendly alert *@
-<Web.Components.ErrorPopup ErrorMessage="@ErrorMessage" ShowError="@showError"></Web.Components.ErrorPopup>
-
-@code {
-    // TODO:: For more complex scenarios, this code could be moved to an external ViewModel cs class
-
-    // Bindable variables
-    List<School> SchoolList = new List<School>();
-    List<Student> StudentList = new List<Student>();
-
-    bool Loading;
-
-    string ErrorMessage;
-    bool showError;
-
-    School _selectedSchool;
-    School SelectedSchool
-    {
-        get => _selectedSchool;
-        set
-        {
-            // When the selected school changes, fire off the LoadStudents method
-            _selectedSchool = value;
-            InvokeAsync(LoadStudentsForSchool);
-        }
-    }
-
-    // Fired on page load
-    protected override async Task OnInitializedAsync()
-    {
-        // Fired on page load - so get a list of schools to choose from
-        try
-        {
-            var schools = await SchoolRepository.GetAll();
-            SchoolList = schools.ToList();
-        }
-        catch (Exception ex)
-        {
-            ErrorMessage = ex.Message;
-            showError = true;
-        }
-
-    }
-
-    /// <summary>
-    /// Gets all the students for the selected school
-    /// </summary>
-    /// <returns></returns>
-    private async Task LoadStudentsForSchool()
-    {
-        try
-        {
-            Loading = true;
-            StateHasChanged(); // Needed to tell page to render the loading spinner (not sure why I need this here but not in the School page)
-            var students = await StudentRepository.GetAll(_selectedSchool.Id);
-            StudentList = students.ToList();
-            Loading = false;
-            StateHasChanged();
-        }
-        catch (Exception ex)
-        {
-            ErrorMessage = ex.Message;
-            showError = true;
-        }
-    }
-}
+<ErrorPopup ErrorMessage="@ErrorMessage" ShowError="@showError"></ErrorPopup>

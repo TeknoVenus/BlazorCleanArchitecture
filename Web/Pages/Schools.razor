@@ -19,27 +19,5 @@
 <Web.Components.ErrorPopup ErrorMessage="@ErrorMessage" ShowError="@showError"></Web.Components.ErrorPopup>
 
 @code {
-    IEnumerable<School> SchoolList = new List<School>();
 
-    bool Loading;
-
-    string ErrorMessage;
-    bool showError;
-
-    // On page load, get all schools
-    protected override async Task OnInitializedAsync()
-    {
-        try
-        {
-            Loading = true;
-            var data = await SchoolRepository.GetAll();
-            SchoolList = data.ToList();
-            Loading = false;
-        }
-        catch (Exception ex)
-        {
-            ErrorMessage = ex.Message;
-            showError = true;
-        }
-    }
 }
